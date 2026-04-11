@@ -6,7 +6,7 @@ import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import swup from "@swup/astro";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeKatex from "rehype-katex";
@@ -29,6 +29,32 @@ export default defineConfig({
 	site: "https://fuwari.vercel.app/",
 	base: "/",
 	trailingSlash: "always",
+	fonts: [
+		{
+			name: "Roboto",
+			cssVariable: "--font-astro6-demo",
+			provider: fontProviders.local(),
+			options: {
+				variants: [
+					{
+						src: ["./src/assets/fonts/roboto-latin-400-normal.woff2"],
+						weight: "400",
+						style: "normal",
+					},
+					{
+						src: ["./src/assets/fonts/roboto-latin-400-italic.woff2"],
+						weight: "400",
+						style: "italic",
+					},
+					{
+						src: ["./src/assets/fonts/roboto-latin-700-normal.woff2"],
+						weight: "700",
+						style: "normal",
+					},
+				],
+			},
+		},
+	],
 	integrations: [
 		tailwind({
 			nesting: true,
@@ -61,12 +87,12 @@ export default defineConfig({
 				pluginCollapsibleSections(),
 				pluginLineNumbers(),
 				pluginLanguageBadge(),
-				pluginCustomCopyButton()
+				pluginCustomCopyButton(),
 			],
 			defaultProps: {
 				wrap: true,
 				overridesByLang: {
-					'shellsession': {
+					shellsession: {
 						showLineNumbers: false,
 					},
 				},
@@ -76,7 +102,8 @@ export default defineConfig({
 				borderRadius: "0.75rem",
 				borderColor: "none",
 				codeFontSize: "0.875rem",
-				codeFontFamily: "'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+				codeFontFamily:
+					"'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
 				codeLineHeight: "1.5rem",
 				frames: {
 					editorBackground: "var(--codeblock-bg)",
@@ -87,19 +114,19 @@ export default defineConfig({
 					editorActiveTabIndicatorBottomColor: "var(--primary)",
 					editorActiveTabIndicatorTopColor: "none",
 					editorTabBarBorderBottomColor: "var(--codeblock-topbar-bg)",
-					terminalTitlebarBorderBottomColor: "none"
+					terminalTitlebarBorderBottomColor: "none",
 				},
 				textMarkers: {
 					delHue: 0,
 					insHue: 180,
-					markHue: 250
-				}
+					markHue: 250,
+				},
 			},
 			frames: {
 				showCopyToClipboardButton: false,
-			}
+			},
 		}),
-        svelte(),
+		svelte(),
 		sitemap(),
 	],
 	markdown: {

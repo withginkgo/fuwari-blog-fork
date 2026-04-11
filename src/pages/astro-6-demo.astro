@@ -1,0 +1,272 @@
+---
+import { Font } from "astro:assets";
+import { getCollection } from "astro:content";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getPostUrlBySlug } from "@utils/url-utils";
+
+const latestPosts = (await getCollection("posts", ({ data }) => !data.draft))
+	.sort((a, b) => b.data.published.getTime() - a.data.published.getTime())
+	.slice(0, 4);
+
+const featureHighlights = [
+	{
+		title: "Built-in Fonts API",
+		description:
+			"Use Astro's new Fonts API with a page-scoped <Font /> component and a local font provider.",
+	},
+	{
+		title: "Content Layer API",
+		description:
+			"This project now uses src/content.config.ts with explicit glob() loaders and Astro 6 entry APIs.",
+	},
+	{
+		title: "Stable CSP Support",
+		description:
+			"Astro 6 ships a stable Content Security Policy API that can hash scripts and styles for static sites.",
+	},
+	{
+		title: "Modernized Tooling",
+		description:
+			"Astro 6 upgrades the toolchain around Node 22, Vite 7, and newer package internals.",
+	},
+];
+---
+
+<MainGridLayout title="Astro 6 Demo" description="A small demo page for Astro 6 features in this migrated project.">
+	<Font slot="head" cssVariable="--font-astro6-demo" preload />
+
+	<div class="card-base px-8 py-8 md:px-10 md:py-10">
+		<div class="astro6-demo-eyebrow">Astro 6 Demo</div>
+		<h1 class="astro6-demo-headline">Fonts API + migrated content layer in the current blog</h1>
+		<p class="astro6-demo-lead">
+			This page demonstrates one Astro 6 feature directly in the UI and one
+			that powers the project under the hood.
+		</p>
+
+		<div class="astro6-demo-grid">
+			<section class="astro6-demo-card">
+				<h2>Visible demo: Fonts API</h2>
+				<p>
+					The headline on this page is loaded with Astro 6&apos;s built-in Fonts API
+					using a locally configured <code>Roboto</code> font family and a page-scoped
+					<code>&lt;Font /&gt;</code> component.
+				</p>
+				<div class="astro6-demo-font-box">
+					<div class="astro6-demo-font-sample astro6-demo-font-sample--display">
+						Astro 6 ships a first-class Fonts API.
+					</div>
+					<div class="astro6-demo-font-sample astro6-demo-font-sample--body">
+						This paragraph stays on the site&apos;s regular typography so the contrast is
+						easy to see.
+					</div>
+				</div>
+			</section>
+
+			<section class="astro6-demo-card">
+				<h2>Project demo: Content Layer API</h2>
+				<p>
+					The list below is read from the migrated <code>posts</code> collection using
+					the Astro 6 content layer setup in <code>src/content.config.ts</code>.
+				</p>
+				<ul class="astro6-demo-posts">
+					{latestPosts.map((post) => (
+						<li>
+							<a href={getPostUrlBySlug(post.id)}>
+								<span>{post.data.title}</span>
+								<code>{post.id}</code>
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+		</div>
+
+		<section class="astro6-demo-features">
+			<h2>Astro 6 highlights</h2>
+			<div class="astro6-demo-feature-grid">
+				{featureHighlights.map((feature) => (
+					<article class="astro6-demo-feature-card">
+						<h3>{feature.title}</h3>
+						<p>{feature.description}</p>
+					</article>
+				))}
+			</div>
+		</section>
+	</div>
+</MainGridLayout>
+
+<style>
+	.astro6-demo-eyebrow {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--primary);
+		margin-bottom: 1rem;
+	}
+
+	.astro6-demo-headline {
+		font-family: var(--font-astro6-demo), sans-serif;
+		font-size: clamp(2.2rem, 5vw, 4.4rem);
+		line-height: 0.96;
+		font-weight: 700;
+		letter-spacing: -0.04em;
+		max-width: 11ch;
+		margin: 0;
+		color: rgb(15 23 42 / 0.92);
+	}
+
+	:global(.dark) .astro6-demo-headline {
+		color: rgb(248 250 252 / 0.92);
+	}
+
+	.astro6-demo-lead {
+		font-size: 1.02rem;
+		line-height: 1.8;
+		max-width: 56rem;
+		margin: 1.4rem 0 0;
+		color: rgb(15 23 42 / 0.68);
+	}
+
+	:global(.dark) .astro6-demo-lead {
+		color: rgb(226 232 240 / 0.7);
+	}
+
+	.astro6-demo-grid {
+		display: grid;
+		gap: 1rem;
+		margin-top: 2rem;
+	}
+
+	.astro6-demo-card,
+	.astro6-demo-feature-card {
+		border: 1px solid rgb(15 23 42 / 0.08);
+		border-radius: 1rem;
+		padding: 1.25rem;
+		background:
+			linear-gradient(160deg, rgb(255 255 255 / 0.96), rgb(248 250 252 / 0.9));
+	}
+
+	:global(.dark) .astro6-demo-card,
+	:global(.dark) .astro6-demo-feature-card {
+		border-color: rgb(255 255 255 / 0.08);
+		background:
+			linear-gradient(160deg, rgb(30 41 59 / 0.94), rgb(15 23 42 / 0.88));
+	}
+
+	.astro6-demo-card h2,
+	.astro6-demo-features h2,
+	.astro6-demo-feature-card h3 {
+		margin: 0 0 0.75rem;
+		color: rgb(15 23 42 / 0.86);
+	}
+
+	:global(.dark) .astro6-demo-card h2,
+	:global(.dark) .astro6-demo-features h2,
+	:global(.dark) .astro6-demo-feature-card h3 {
+		color: rgb(248 250 252 / 0.9);
+	}
+
+	.astro6-demo-card p,
+	.astro6-demo-feature-card p {
+		margin: 0;
+		line-height: 1.75;
+		color: rgb(15 23 42 / 0.65);
+	}
+
+	:global(.dark) .astro6-demo-card p,
+	:global(.dark) .astro6-demo-feature-card p {
+		color: rgb(226 232 240 / 0.68);
+	}
+
+	.astro6-demo-font-box {
+		margin-top: 1rem;
+		padding: 1rem;
+		border-radius: 0.9rem;
+		background: rgb(15 23 42 / 0.04);
+	}
+
+	:global(.dark) .astro6-demo-font-box {
+		background: rgb(255 255 255 / 0.05);
+	}
+
+	.astro6-demo-font-sample {
+		line-height: 1.6;
+	}
+
+	.astro6-demo-font-sample--display {
+		font-family: var(--font-astro6-demo), sans-serif;
+		font-size: clamp(1.5rem, 3vw, 2.6rem);
+		font-weight: 700;
+		letter-spacing: -0.04em;
+	}
+
+	.astro6-demo-font-sample--body {
+		margin-top: 0.8rem;
+		color: rgb(15 23 42 / 0.66);
+	}
+
+	:global(.dark) .astro6-demo-font-sample--body {
+		color: rgb(226 232 240 / 0.66);
+	}
+
+	.astro6-demo-posts {
+		margin: 1rem 0 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.astro6-demo-posts a {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		align-items: center;
+		text-decoration: none;
+		padding: 0.9rem 1rem;
+		border-radius: 0.85rem;
+		background: rgb(15 23 42 / 0.05);
+		color: inherit;
+		transition: background-color 0.2s ease, transform 0.2s ease;
+	}
+
+	.astro6-demo-posts a:hover {
+		background: rgb(15 23 42 / 0.09);
+		transform: translateY(-1px);
+	}
+
+	:global(.dark) .astro6-demo-posts a {
+		background: rgb(255 255 255 / 0.05);
+	}
+
+	:global(.dark) .astro6-demo-posts a:hover {
+		background: rgb(255 255 255 / 0.08);
+	}
+
+	.astro6-demo-posts span {
+		font-weight: 600;
+	}
+
+	.astro6-demo-posts code {
+		font-size: 0.82rem;
+		color: var(--primary);
+	}
+
+	.astro6-demo-features {
+		margin-top: 2rem;
+	}
+
+	.astro6-demo-feature-grid {
+		display: grid;
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	@media (min-width: 900px) {
+		.astro6-demo-grid,
+		.astro6-demo-feature-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+</style>
