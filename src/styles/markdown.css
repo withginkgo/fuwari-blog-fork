@@ -20,7 +20,7 @@
     }
 
     a:not(.no-styling) {
-        @apply relative z-0 bg-none rounded-md p-1 -m-1 transition font-medium text-[var(--primary)]
+        @apply relative z-0 bg-transparent rounded-md p-1 -m-1 transition font-medium text-[var(--primary)]
         underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4
         before:absolute before:inset-0 before:-z-10 before:scale-[0.85] before:rounded-[inherit]
         before:transition before:ease-out hover:before:scale-100
