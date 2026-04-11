@@ -21,7 +21,7 @@ export function getTagUrl(tag: string): string {
 	return url(`/archive/?tag=${encodeURIComponent(tag.trim())}`);
 }
 
-export function getCategoryUrl(category: string | null): string {
+export function getCategoryUrl(category: string | null | undefined): string {
 	if (
 		!category ||
 		category.trim() === "" ||
@@ -37,6 +37,19 @@ export function getDir(path: string): string {
 		return "/";
 	}
 	return path.substring(0, lastSlashIndex + 1);
+}
+
+export function getEntryAssetDir(filePath?: string): string {
+	if (!filePath) {
+		return "/";
+	}
+
+	const normalizedPath = filePath
+		.replace(/\\/g, "/")
+		.replace(/^src\/content\/[^/]+\//, "")
+		.replace(/^content\/[^/]+\//, "");
+
+	return getDir(normalizedPath);
 }
 
 export function url(path: string) {
