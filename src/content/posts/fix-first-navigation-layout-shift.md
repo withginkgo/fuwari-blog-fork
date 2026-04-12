@@ -3,7 +3,7 @@ title: 修复首次页面切换时的横向偏移
 published: 2026-04-11
 description: 记录一次 Astro + Swup 博客在首次点击 About 或 Archive 时，页面整体向左偏移一下的问题排查和修复。
 tags: [Astro, Swup, CSS, Debugging]
-category: Guides
+category: Frontend
 draft: false
 lang: zh_CN
 ---

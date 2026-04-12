@@ -1,9 +1,9 @@
 ---
 title: 在当前 Astro 6 项目里接入 Vue，并修掉按钮发黑问题
-published: 2026-04-11
+published: 2026-04-12
 description: 记录这次给 Astro 6 博客接入 Vue 的过程，以及随后修复 categories、配色切换和明暗切换按钮发黑问题的思路。
 tags: [Astro, Vue, Debugging, UI]
-category: Guides
+category: Frontend
 draft: false
 lang: zh_CN
 ---
