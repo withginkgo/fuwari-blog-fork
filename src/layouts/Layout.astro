@@ -1,8 +1,4 @@
 ---
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
 import "overlayscrollbars/overlayscrollbars.css";
@@ -160,9 +156,32 @@ const bannerOffset =
 	'banner-height': `${BANNER_HEIGHT}vh`,
 }}>
 	@tailwind components;
+	@font-face {
+		font-family: "LXGW Neo XiHei";
+		src:
+			local("LXGW Neo XiHei"),
+			local("霞鹜新晰黑"),
+			url("/fonts/LXGWNeoXiHei.ttf") format("truetype");
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	}
+
 	html {
 		overflow-y: scroll;
 		scrollbar-gutter: stable;
+	}
+
+	html,
+	body {
+		font-family:
+			"LXGW Neo XiHei",
+			"PingFang SC",
+			"Hiragino Sans GB",
+			"Microsoft YaHei",
+			"Noto Sans CJK SC",
+			"Noto Sans SC",
+			sans-serif;
 	}
 
 	@layer components {
