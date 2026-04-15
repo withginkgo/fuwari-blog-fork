@@ -1,6 +1,6 @@
 ---
 title: 从 Astro 5 升级到 Astro 6 的记录
-published: 2026-04-11
+published: 2026-03-11
 description: 这次把 Fuwari 从 Astro 5.13.10 升到 Astro 6.1.5 时，实际遇到的问题和修复步骤。
 tags: [Astro, Migration, Upgrade]
 category: Frontend

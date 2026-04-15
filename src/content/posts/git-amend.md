@@ -1,6 +1,6 @@
 ---
 title: Git 提交中的 chore 类型及修复错误提交的实战
-published: 2026-04-13
+published: 2025-04-13
 tags: [Git, Conventional Commits, version control]
 category: utilities
 draft: false

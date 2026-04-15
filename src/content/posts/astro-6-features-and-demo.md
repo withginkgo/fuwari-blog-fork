@@ -1,6 +1,6 @@
 ---
 title: Astro 6 新特性梳理和当前项目 Demo
-published: 2026-04-11
+published: 2026-03-11
 description: 基于当前已经迁到 Astro 6 的博客项目，梳理 Astro 6 的主要新特性，并落一个可访问 demo。
 tags: [Astro, Demo, Migration]
 category: Frontend

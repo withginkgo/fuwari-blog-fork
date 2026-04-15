@@ -1,6 +1,6 @@
 ---
 title: 把博客正文字体切到霞鹜新晰黑，顺手解决 Markdown 粗体突兀
-published: 2026-04-13
+published: 2026-03-13
 description: 记录这次排查 Markdown 粗体观感异常的过程，以及最终把博客正文切到霞鹜新晰黑的原因和落地方式。
 tags: [Typography, Astro, CSS, Debugging]
 category: Frontend
